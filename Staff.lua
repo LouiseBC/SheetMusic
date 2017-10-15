@@ -1,12 +1,19 @@
 local N_LINES = 9
 local LINE_SPACING = 15
 local MARGIN_LEFT = 20
-local NOTE_WIDTH = LINE_SPACING * 0.75
-local Note = require('Notes')(LINE_SPACING, NOTE_WIDTH)
+local NOTE_RADIUSX = LINE_SPACING * 0.625
 
-local function addNote(staff, note)
-  local shift = MARGIN_LEFT + (table.getn(staff.notes) * NOTE_WIDTH * 2)
-  table.insert(staff.notes, Note(note, staff.xPos + shift, staff.yPos))
+local Note = require('Notes').init(LINE_SPACING, NOTE_RADIUSX)
+local NTypes = require('Notes').types
+
+local function addNote(staff, note, type)
+  local shift = MARGIN_LEFT + (table.getn(staff.notes) * NOTE_RADIUSX * 2)
+  table.insert(staff.notes, Note(
+    note, 
+    staff.xPos + shift, 
+    staff.yPos, 
+    (type == NTypes.whole or type == NTypes.half) and type or NTypes.quarter)
+  )
 end
 
 local function draw(staff)

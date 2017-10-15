@@ -1,5 +1,5 @@
-local Letter = require('Notes')
 local Staff = require('Staff')
+local NoteTypes = require('Notes').types
 
 local pressed = nil
 local n_notes = nil
@@ -10,9 +10,9 @@ function love.load()
   love.graphics.setNewFont(20)
   
   staff = Staff(100, 600, 200)
-  staff:addNote(1)
+  staff:addNote(1, NoteTypes.whole)
   staff:addNote(5)
-  staff:addNote(12)
+  staff:addNote(12, NoteTypes.half)
   staff:addNote(9)
 
   n_notes = table.getn(staff.notes)
